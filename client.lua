@@ -1,6 +1,36 @@
 local open = false
 local sent = false
 local closing = false
+
+local unfuck = function (...)
+    local a = {...}
+    local t = {}
+
+    for key, value in pairs(a) do
+        t[#t+1] = value
+    end
+    return table.unpack(t)
+end
+
+local Event = function (data, custom_arg)
+    if not data or not data.table then
+        local t = data
+
+        data = {}
+        data.table = t
+    end
+
+    if not custom_arg then
+        custom_arg = {}
+    end
+
+    if data.table['server_event'] and data.table['event'] then
+        TriggerServerEvent(data.table['event'], unfuck(table.unpack(custom_arg)))
+    elseif data.table['event'] then
+        TriggerEvent(data.table['event'], unfuck(table.unpack(custom_arg)))
+    end
+end
+
 RegisterNUICallback('zone_event', function(data, cb)
     sent = true
     Event(data,data.table['custom_arg'] or {})
@@ -168,28 +198,3 @@ AddEventHandler('renzu_popui:closeui', function(force)
         SetNuiFocusKeepInput(false)
     end
 end)
-
-function Event(data,custom_arg)
-    if data == nil or data.table == nil then
-        local t = data
-        data = {}
-        data.table = t
-    end
-    if custom_arg == nil then
-        custom_arg = {}
-    end
-    if data.table['server_event'] and data.table['event'] ~= nil then
-        TriggerServerEvent(data.table['event'],unfuck(table.unpack(custom_arg)))
-    elseif data.table['event'] ~= nil then
-        TriggerEvent(data.table['event'],unfuck(table.unpack(custom_arg)))
-    end
-end
-
-function unfuck(...)
-    local a = {...}
-    local t = {}
-    for k,v in pairs(a) do
-        table.insert(t,v)
-    end
-    return table.unpack(t)
-end
