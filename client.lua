@@ -55,7 +55,7 @@ RegisterNuiCallback('close', function (data)
         if not closing then
             closing = true
         end
-        count += 1
+        count = count + 1
         Wait(100)
     end
 
