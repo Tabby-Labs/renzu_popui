@@ -245,3 +245,22 @@ RegisterNetEvent('renzu_popui:closeui', function(force)
         SetNuiFocusKeepInput(false)
     end
 end)
+
+RegisterCommand('popui_drwtxt', function ()
+    local table = {
+        key = 'E',
+        event = 'script:myevent',
+        title = 'Press [E] to buy COLA',
+        invehicle_title = 'Buy COLA',
+        server_event = false,
+        unpack_arg = false,
+        fa = '<i class="fad fa-gas-pump"></i>',
+        custom_arg = {}, -- example: {1,2,3,4}
+    }
+
+    TriggerEvent('renzu_popui:drawtextuiwithinput', table)
+end, false)
+
+RegisterCommand('popui_close', function ()
+    TriggerEvent('renzu_popui:closeui')
+end, false)
