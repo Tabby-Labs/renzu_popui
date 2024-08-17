@@ -1,20 +1,15 @@
 fx_version 'cerulean'
--- Renzu PopUI
--- MADE BY Renzuzu
 game 'gta5'
 
-lua54 'on'
--- is_cfxv2 'yes'
--- use_fxv2_oal 'true'
+-- Renzu PopUI
+-- MADE BY Renzuzu
+description 'Renzu PopUI'
+author 'Renzuzu'
+version '1.12.0'
 
-ui_page {
-    'html/index.html',
-}
+client_script 'client.lua'
 
-client_scripts {
-	"client.lua"
-}
-
+ui_page 'html/index.html'
 files {
 	'html/index.html',
 	'html/script.js',
