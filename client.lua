@@ -2,7 +2,7 @@ local open = false
 local sent = false
 local closing = false
 
-local unfuck = function (...)
+local unpack = function (...)
     local a = {...}
     local t = {}
 
@@ -25,9 +25,9 @@ local Event = function (data, custom_arg)
     end
 
     if data.table['server_event'] and data.table['event'] then
-        TriggerServerEvent(data.table['event'], unfuck(table.unpack(custom_arg)))
+        TriggerServerEvent(data.table['event'], unpack(table.unpack(custom_arg)))
     elseif data.table['event'] then
-        TriggerEvent(data.table['event'], unfuck(table.unpack(custom_arg)))
+        TriggerEvent(data.table['event'], unpack(table.unpack(custom_arg)))
     end
 end
 
